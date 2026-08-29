@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>猜数字游戏</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      max-width: 400px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    input {
+      font-size: 20px;
+      padding: 8px;
+      width: 110px;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      font-size: 18px;
+      padding: 8px 22px;
+      margin: 10px 4px;
+      border: none;
+      border-radius: 6px;
+      background: #4a90d9;
+      color: white;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 24px;
+      font-size: 22px;
+      min-height: 30px;
+      font-weight: bold;
+    }
+    #attempts {
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 猜数字</h1>
+  <p>我心里想了一个 <b>1~100</b> 的数字，来猜猜看</p>
+  <input id="guessInput" type="number" min="1" max="100" placeholder="输入数字">
+  <button id="guessBtn">猜！</button>
+  <p id="attempts">已猜 0 次</p>
+  <div id="message">来试试吧</div>
+  <button id="resetBtn" style="display:none">再来一局</button>
+
+  <script src="game.js"></script>
+</body>
+</html>
