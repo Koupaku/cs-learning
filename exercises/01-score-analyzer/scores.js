@@ -72,7 +72,7 @@ function formatTopStudent(students) {
   //const top = scores.filter((s) s >= s); //使用大的值一直替换掉小的值
   //return(`${students.}`,`${formatTopStudent(students)}分`);
   const top = students.reduce((best,s) => s.score > best.score ? s:best);
-  return `${top.name}，${top.score}分`;
+  return `${top.name}， ${top.score}分`;
 
 };
 
