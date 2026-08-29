@@ -24,6 +24,7 @@ function newGame() {
   //   Math.random() * 100  → 0~100 之间的小数（不含 100）
   //   Math.floor(x)        → 向下取整，比如 Math.floor(3.9) === 3
   // 先想清楚：怎么得到 1~100 的整数？
+  target = Math.floor(Math.random() * 100) + 1 ;
 
   attempts = 0;
   gameOver = false;
@@ -40,7 +41,8 @@ function makeGuess() {
   // TODO 2: 读取输入框里的数字，转成数字类型存进 guess
   // 提示：guessInput.value 是字符串（比如 "42"），
   //       Number("42") 或 parseInt("42", 10) 都能转成数字 42
-  const guess = 0;
+  //document.getElementById('guessInput'); 
+  const guess = Number(guessInput.value);
 
   // 防御：如果没输入或输入非法，直接提示并退出
   if (!guess || guess < 1 || guess > 100) {
@@ -56,6 +58,17 @@ function makeGuess() {
   //  - guess 比 target 小 → message.textContent = '📈 太小了！'
   //  - 相等 → 恭喜信息 + 把 gameOver 设为 true + 显示"再来一局"按钮
   //    恭喜信息示例：`🎉 恭喜！就是 ${target}，你用了 ${attempts} 次`
+  if(guess > target) {
+    message.textContent = '📉 太大了！' ;
+  }else if(guess < target){
+    message.textContent = '📈 太小了！';
+  }else{
+    message.textContent = `🎉 恭喜！就是 ${target}，你用了 ${attempts} 次`;
+    gameOver = true;
+    resetBtn.style.display = '';
+  }
+
+ 
 }
 
 // ========== 第 5 步：把按钮和函数"接上线" ==========
