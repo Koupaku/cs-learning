@@ -71,6 +71,13 @@ function makeGuess() {
  
 }
 
+guessInput.addEventListener('keydown',(event) =>{
+  if (event.key === 'Enter'){
+    makeGuess();
+  }
+});
+
+
 // ========== 第 5 步：把按钮和函数"接上线" ==========
 // 事件：addEventListener('click', 函数) = "当按钮被点击时，执行这个函数"
 guessBtn.addEventListener('click', makeGuess);
