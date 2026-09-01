@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>天气卡片</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      max-width: 400px;
+      margin: 60px auto;
+      text-align: center;
+    }
+    .city-btn {
+      font-size: 16px;
+      padding: 8px 18px;
+      margin: 4px;
+      border: none;
+      border-radius: 6px;
+      background: #4a90d9;
+      color: white;
+      cursor: pointer;
+    }
+    .card {
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 12px;
+      background: #f0f6ff;
+      min-height: 120px;
+    }
+    .city-name { font-size: 22px; font-weight: bold; }
+    .temp { font-size: 52px; font-weight: bold; margin: 8px 0; }
+    .wind { color: #666; }
+    #status { margin-top: 16px; color: #e05d5d; min-height: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🌤️ 天气卡片</h1>
+  <div>
+    <button class="city-btn" data-city="北京">北京</button>
+    <button class="city-btn" data-city="上海">上海</button>
+    <button class="city-btn" data-city="广州">广州</button>
+    <button class="city-btn" data-city="深圳">深圳</button>
+  </div>
+  <div class="card" id="card">
+    <div class="city-name" id="cityName">选择城市</div>
+    <div class="temp" id="temp">--</div>
+    <div class="wind" id="wind"></div>
+  </div>
+  <div id="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
