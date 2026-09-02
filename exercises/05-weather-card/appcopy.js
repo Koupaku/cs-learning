@@ -4,7 +4,7 @@ const wind = document.getElementById('wind');
 const status = document.getElementById('status');
 
 const cities = {
-  北京 : { lat: 39.9 , lon: 116.4},
+  北京: { lat: 39.9 , lon: 116.4},
   上海: { lat: 31.2, lon: 121.5 },
   广州: { lat: 23.1, lon: 113.3 },
   深圳: { lat: 22.5, lon: 114.1 },

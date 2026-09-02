@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>我的名片</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 练习 06：个人名片
+       语义化标签：main / section 比光秃秃的 div 更有"名分"，浏览器和面试官都喜欢 -->
+
+  <main class="card">
+    <!-- 头像：先用 emoji 占位，CSS 里把它变成圆形（见 style.css TODO 3） -->
+    <div class="avatar">👨‍💻</div>
+
+    <h1 class="name">你的名字</h1>
+    <p class="title">前端开发学习者</p>
+
+    <!-- 技能标签：3 个，排成一行的样式见 style.css TODO 4 -->
+    <div class="tags">
+      <span class="tag">JavaScript</span>
+      <span class="tag">HTML / CSS</span>
+      <span class="tag">React 学习中</span>
+    </div>
+
+    <button class="btn">联系我</button>
+  </main>
+
+</body>
+</html>

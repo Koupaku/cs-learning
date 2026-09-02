@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>打样：CSS 基础（盒模型 + Flexbox）</title>
+<style>
+  /* ============================================================
+     打样：CSS 基础 —— 盒模型 与 Flexbox
+     使用方法：双击打开，一边看页面效果，一边读注释
+     CSS 的规则：每个元素都是一个"盒子"，盒子怎么摆，全靠两条
+     主线：盒模型（盒子内部长啥样）+ Flexbox（盒子怎么排队）
+     ============================================================ */
+
+  /* ---------- 全局 ---------- */
+  body {
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    padding: 20px 30px 60px;
+    margin: 0;
+  }
+  h2 { margin-top: 50px; border-left: 4px solid #4a90d9; padding-left: 10px; }
+  .demo-box {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .hint { color: #888; font-size: 14px; }
+
+  /* ============================================================
+     【零件 1】盒模型：每个元素都是"快递箱"
+     ------------------------------------------------------------
+     从外到内四层：
+       margin  外边距 —— 箱子与箱子之间的间距（透明）
+       border  边框   —— 纸箱壁（可见）
+       padding 内边距 —— 箱内泡沫，内容与箱壁的距离（会变大箱子）
+       content 内容   —— 真正装的东西（文字/图片）
+     ------------------------------------------------------------ */
+  .box1 {
+    width: 200px;              /* content 的宽度 */
+    padding: 24px;             /* 泡沫厚度：内容四周各 24px */
+    border: 5px solid #4a90d9; /* 纸箱壁：5px 蓝边框 */
+    margin: 30px;              /* 箱子间距：四周各 30px */
+    background: #e8f0fe;       /* 背景只涂到 border 内侧（content+padding） */
+  }
+
+  /* ============================================================
+     【零件 2】盒模型的头号陷阱：width 到底算哪部分？
+     ------------------------------------------------------------
+     默认（content-box）：width 只管 content，总宽度 = width+padding+border
+     所以两个"看起来一样宽"的箱子，实际宽度不一样 —— 布局全乱！
+     解决：box-sizing: border-box → width 变成"总宽度"（含 padding/border）
+     现代开发 99% 都用 border-box
+     ------------------------------------------------------------ */
+  .box2 {
+    box-sizing: content-box;   /* 默认：总宽 = 300 + 20*2 + 5*2 = 350 */
+    width: 300px;
+    padding: 20px;
+    border: 5px solid #e05d5d;
+    background: #fdeaea;
+    margin-bottom: 10px;
+  }
+  .box3 {
+    box-sizing: border-box;    /* 总宽 = 300（padding/border 被含进去） */
+    width: 300px;
+    padding: 20px;
+    border: 5px solid #4a90d9;
+    background: #e8f0fe;
+  }
+
+  /* ============================================================
+     【零件 3】Flexbox：让盒子"排队"
+     ------------------------------------------------------------
+     三步走：
+       1. 在"家长"身上写 display: flex → 它变成弹性容器
+       2. 孩子们自动排成一横排
+       3. 用 justify-content（主轴方向）和 align-items（交叉轴方向）调位置
+     ------------------------------------------------------------ */
+  .flex-demo {
+    display: flex;              /* ① 家长变身 */
+    justify-content: space-between; /* ② 主轴（横）方向：孩子间均匀分布 */
+    align-items: center;        /* ③ 交叉轴（竖）方向：垂直居中 */
+    gap: 12px;                  /* 孩子之间的距离（现在主流写法，别再用 margin 挤） */
+    background: #f0f6ff;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  .child {
+    background: #4a90d9;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 6px;
+    text-align: center;
+    /* 下面的两行让文字在盒子里也居中（flex 的经典用法） */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .child.tall { padding: 30px 20px; }  /* 故意做一个高个子，看 align-items 效果 */
+
+  /* ============================================================
+     【零件 4】垂直+水平居中大法（面试必考，一次记住）
+     ------------------------------------------------------------
+     "让一个东西居中" = 家长 flex + 两个 center
+     ------------------------------------------------------------ */
+  .center-demo {
+    display: flex;              /* 家长变 flex */
+    justify-content: center;    /* 水平居中 */
+    align-items: center;        /* 垂直居中 */
+    height: 160px;              /* 得有高度才能看出垂直居中 */
+    background: #f0f6ff;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+  <h1>🎨 打样：CSS 基础</h1>
+  <p class="hint">改一改下面这些属性值（比如把 padding 改成 40px），保存刷新，看效果变化——CSS 就是要"动手调"。</p>
+
+  <h2>零件 1：盒模型</h2>
+  <p class="hint">这个箱子有：width 200 + padding 24 + border 5 + margin 30。它在页面上实际占了多宽？</p>
+  <div class="demo-box">
+    <div class="box1">我是盒子：内容区（蓝色背景是 content+padding，蓝框是 border，框外透明的间距是 margin）</div>
+  </div>
+
+  <h2>零件 2：width 陷阱（content-box vs border-box）</h2>
+  <p class="hint">两个盒子 width 都是 300，但上面红色那个是默认（总宽350），下面蓝色用了 border-box（总宽正好300）——对齐一下看看谁更整齐。</p>
+  <div class="demo-box">
+    <div class="box2">默认 content-box（总宽 350）</div>
+    <div class="box3">border-box（总宽 300）✅</div>
+  </div>
+
+  <h2>零件 3：Flexbox 排队</h2>
+  <p class="hint">试试把 justify-content 改成 center / space-around，或把 align-items 改成 flex-start，看孩子怎么变。</p>
+  <div class="demo-box">
+    <div class="flex-demo">
+      <div class="child">1</div>
+      <div class="child tall">2</div>
+      <div class="child">3</div>
+    </div>
+  </div>
+
+  <h2>零件 4：居中大法</h2>
+  <div class="demo-box">
+    <div class="center-demo">我在正中间（家长 flex + 两个 center）</div>
+  </div>
+
+</body>
+</html>

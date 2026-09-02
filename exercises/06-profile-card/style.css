@@ -1,0 +1,97 @@
+/* 练习 06：个人名片样式
+   新零件打样：notes/06-CSS基础打样/（先打开它看效果，再回来写）
+   思路：先让页面居中 → 再打扮卡片 → 再排细节 */
+
+/* ===== 基础重置 ===== */
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  margin: 0;
+}
+
+/* ===== TODO 1: 让卡片在屏幕正中间 ===== */
+/* 提示：
+   1. body 变成 flex 容器（display: flex）
+   2. 水平居中 justify-content: center
+   3. 垂直居中 align-items: center
+   4. 给 body 一个高度：height: 100vh（vh = 视口高度，100vh = 整个屏幕高） */
+body {
+   display: flex;
+   justify-content:center;
+   align-items: center;
+   height: 100vh;
+
+}  
+/* ===== TODO 2: 卡片本体 —— 盒模型三件套 ===== */
+/* 提示：.card 需要
+   - 背景色（比如白色）
+   - padding（卡片内部的呼吸空间）
+   - border-radius（圆角，比如 16px）
+   - box-shadow（阴影，卡片悬浮感）
+     格式：box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+   - text-align: center（文字居中） */
+.card {
+   background-color: white;
+   padding: 16px;
+   border-radius: 16px;
+   box-shadow:0 15px 30px rgba(0,0,0,0.15);
+   text-align: center;
+}
+/* ===== TODO 3: 头像变圆 ===== */
+/* 提示：.avatar 需要
+   - width 和 height 一样（比如 80px）
+   - border-radius: 50%（圆形！）
+   - 背景色 + 大字号（emoji 会跟着变大）
+   - 用 flex 让 emoji 在圆里居中（零件 4 的居中大法） */
+.avatar{
+   box-sizing: border-box;
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   background-color: aquamarine;
+   /*怎么让emoji变大*/
+   font-size: 40px;
+   display: flex;
+   justify-content:center;
+   align-items:center;
+   margin: 0 auto;
+   /*头像不在中间欸*/
+}
+/* ===== TODO 4: 标签排成一行 ===== */
+/* 提示：.tags 需要
+   - display: flex
+   - justify-content: center
+   - gap: 8px（标签间距）
+   .tag 需要：
+   - 背景色（浅灰）+ padding 小一点 + border-radius */
+.tags{
+   display: flex;
+   justify-content: center;
+   gap: 8px;
+}
+
+.tag{
+   background-color: gray;
+   padding: 10px;
+   border-radius: 50%;
+}
+/* ===== TODO 5: 按钮 + hover 动画 ===== */
+/* 提示：.btn 需要
+   - 背景色（蓝）+ 白字 + padding + border-radius + border: none
+   - cursor: pointer（鼠标变手型）
+   - transition: 0.2s（过渡动画，让变化"滑"过去）
+   .btn:hover 需要：
+   - 背景色变深一点（hover = 鼠标悬停时） */
+.btn{
+   background-color: blue;
+   /*设置字体颜色*/ 
+   color: white;
+   padding: 12px 24px;
+   border-radius: 8px;
+   border: none;
+   cursor: pointer;
+   transition: 0.2s;
+
+}
+.btn:hover{
+   background-color: #2f6fb5;
+}

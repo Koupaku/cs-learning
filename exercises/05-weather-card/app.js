@@ -19,7 +19,7 @@ const cities = {
 
 // ===== TODO 1: 查询天气（核心！照着打样零件 3 写） =====
 async function fetchWeather(city) {
-  try{
+  try {
   // 要求：
   // 1. 显示"加载中..."（把 status 的文字改一下）
   // 2. 拼 URL（注意用模板字符串）：
@@ -41,7 +41,8 @@ async function fetchWeather(city) {
     ////console.log(`${cities[city].textContent}}现在的温度${temp}°C，风速${wind} km/h`);
     ////const weatherDiv = document.getElementById('weather');
     ////weatherDiv.textContent = `${cities[city]}:${temp}°C，风速 ${wind} km/h`;
-    status.textContent = `${city}:${temp}°C，风速 ${wind} km/h`;
+    ////displayWeather.textContent = `${city}:${temp}°C，风速 ${wind} km/h`;
+    displayWeather(city,temp,wind);
   } catch(error) {
     status.textContent = '查询失败：' + error.message;
   }
@@ -64,3 +65,4 @@ document.querySelectorAll('.city-btn').forEach((btn) => {
     fetchWeather(btn.dataset.city);
   });
 });
+0
