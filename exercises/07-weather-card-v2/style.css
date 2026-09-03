@@ -1,0 +1,86 @@
+/* 练习 07：天气卡片 2.0 样式
+   新零件打样：notes/07-Grid与响应式打样/（先拖窗口玩一遍！）
+   目标：从"能用"到"能看"——配色、层次、响应式 */
+
+/* ===== 页面基础 ===== */
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  margin: 0;
+}
+
+/* ===== TODO 1: 页面居中 + 渐变背景 ===== */
+/* 提示：
+   1. body 用 flex 居中（练习06的居中大法）+ height: 100vh
+   2. 背景渐变：background: linear-gradient(135deg, #667eea, #764ba2);
+      （两个颜色斜向渐变，135deg 是角度，可随便换颜色玩） */
+body{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+/* ===== TODO 2: 城市按钮 —— 用 Grid 自动排列 ===== */
+/* 提示：.city-btns 用打样零件 4 的省心网格：
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+   gap: 8px;
+   这样窄屏时按钮自动从 4 个一排变成 2 个一排、1 个一排 */
+
+.city-btns{
+   display: grid;
+   grid-template-columns: repeat(auto-fit,minmax(80px,1fr));
+   gap: 8px;
+/* 四个城市一直是一列*/
+}
+
+/* ===== TODO 3: 卡片本体 ===== */
+/* 提示：.card
+   - 白底（半透明更高级：background: rgba(255,255,255,0.9)）
+   - padding 大一点 + border-radius + box-shadow
+   - max-width: 360px（防太宽）+ 宽度自适应
+   - text-align: center */
+
+.card{
+   background: rgba(255, 255, 255, 0.8);
+   padding: 12px 24px;
+   max-width: 360px;
+   border-radius: 16px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+   text-align: center;
+} /*一整列都是白色*/
+
+/* ===== TODO 4: 展示区 + 状态行配色 ===== */
+/* 提示：
+   .weather-emoji { font-size: 64px; }   ← emoji 要大
+   .temp { font-size: 48px; font-weight: bold; }
+   .city-name { font-size: 20px; font-weight: bold; margin-top: 8px; }
+   #status 根据 class 变色：
+     #status.loading { color: #4a90d9; }  ← 加载中蓝色
+     #status.error   { color: #e05d5d; }  ← 出错红色
+   （class 由 app.js 里的 JS 添加，你先写好 CSS） */
+.weather-emoji {font-size: 64px;}
+.temp { font-size: 48px;font-weight: bold;}
+.city-name {font-size: 20px;font-weight: bold; margin-top: 8px ;}
+#status.loading {color: #4a90d9;}
+#status.error  { color: #e05d5d;}
+/* ===== TODO 5: 城市按钮样式 ===== */
+/* 提示：.city-btn
+   - 白底/浅底 + 边框或阴影（别再用蓝底白字，太"工具感"）
+   - border-radius + padding + cursor: pointer
+   - transition: 0.2s
+   .city-btn:hover { 变深一点 } */
+.city-btn{
+   color: black;
+   background-color: white;
+   box-shadow: 0 15px 30px rgba(0, 0, 0,0.15);
+   /*box-shadowa的用法，这几个数是什么意思？*/
+   border-radius: 999px;
+   padding: 8px;
+   cursor: pointer;
+}
+
+.city-btn:hover {
+   background-color: rgba(245, 239, 239, 0.774);
+}

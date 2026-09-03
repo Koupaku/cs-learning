@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>天气卡片 2.0</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 练习 07：天气卡片 2.0（装修版）
+       把练习 05 的天气卡片升级成"能看"的作品：图标、配色、响应式 -->
+
+  <main class="card">
+    <h1>🌤️ 天气卡片</h1>
+
+    <!-- 城市按钮区：排成一排，窄屏自动换行（style.css TODO 2） -->
+    <div class="city-btns">
+      <button class="city-btn" data-city="北京">北京</button>
+      <button class="city-btn" data-city="上海">上海</button>
+      <button class="city-btn" data-city="广州">广州</button>
+      <button class="city-btn" data-city="深圳">深圳</button>
+    </div>
+
+    <!-- 天气展示区 -->
+    <div class="weather-info">
+      <div class="weather-emoji" id="weatherEmoji">--</div>
+      <div class="city-name" id="cityName">选择城市</div>
+      <div class="temp" id="temp">--</div>
+      <div class="wind" id="wind"></div>
+    </div>
+
+    <!-- 状态行：加载中 / 出错（样式在 style.css TODO 4） -->
+    <div class="status" id="status"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

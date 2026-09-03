@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>打样：Grid + 响应式 + 定位</title>
+<style>
+  /* ============================================================
+     打样：CSS 三件新武器 —— Grid（网格） / 响应式 / 定位
+     使用方法：打开页面 → 拖动窗口宽度变化 → 看卡片数量自动变化
+     ============================================================ */
+
+  body {
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    padding: 20px 30px 60px;
+    margin: 0;
+  }
+  h2 { border-left: 4px solid #4a90d9; padding-left: 10px; margin-top: 50px; }
+  .hint { color: #888; font-size: 14px; }
+  .demo-box { background: white; padding: 16px; border-radius: 8px; margin-top: 10px; }
+
+  /* ============================================================
+     【零件 1】Grid：二维排布（flex 是一维排队，grid 是"铺地砖"）
+     ------------------------------------------------------------
+     flex  = 排横队/纵队（一条线）
+     grid  = 地砖（几行几列自己定）
+     ------------------------------------------------------------ */
+  .grid-demo {
+    display: grid;                       /* ① 变"地砖"容器 */
+    grid-template-columns: repeat(3, 1fr); /* ② 3 列，每列等宽（1fr = 分一份） */
+    gap: 12px;                           /* ③ 砖缝 */
+  }
+  .tile {
+    background: #4564a3;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }  
+
+  /* 两行写死的：grid-template-columns: 200px 200px 200px（写死） */
+  /* 或 repeat(3, 1fr)（3份等宽，自适应容器）—— 1fr 是重点！ */
+
+  /* ============================================================
+     【零件 2】响应式：让布局随窗口宽度"自动变形"
+     ------------------------------------------------------------
+     @media (max-width: 600px) = "当窗口宽度 ≤ 600px 时，执行里面的规则"
+     ------------------------------------------------------------ */
+  .responsive-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 宽屏：3 列 */
+    gap: 12px;
+    transition: grid-template-columns 0.3s; /* 平滑过渡（可选） */
+  }
+  .r-tile {
+    background: #e8a04a;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  /* ↓↓↓ 响应式核心：窗口变窄到 600px 以下时，3 列变 1 列 ↓↓↓ */
+  @media (max-width: 600px) {
+    .responsive-demo {
+      grid-template-columns: 1fr;   /* 窄屏：1 列（每块占满） */
+    }
+  }
+  /* 拖动窗口宽度，亲眼看看 3 列 → 1 列的变化 */
+
+  /* ============================================================
+     【零件 3】定位：让元素"叠"起来
+     ------------------------------------------------------------
+     position: relative  = 给元素一个"锚点"身份（它自己不动）
+     position: absolute  = 相对于最近的"锚点祖先"来摆放
+     用途：角标、徽章、悬浮按钮（如"NEW"角标）
+     ------------------------------------------------------------ */
+  .badge-demo {
+    position: relative;                  /* ① 这个盒子当锚点 */
+    width: 200px;
+    height: 120px;
+    background: #f0f6ff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+  }
+  .badge {
+    position: absolute;                  /* ② 徽章脱离文档流，按锚点定位 */
+    top: -10px;                          /* ③ 顶到锚点的上方 10px 处（凸出来） */
+    right: -10px;
+    background: #e05d5d;
+    color: white;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  /* ============================================================
+     【零件 4】auto-fit + minmax：最省心的响应式网格（推荐！）
+     ------------------------------------------------------------
+     repeat(auto-fit, minmax(80px, 1fr)) 的意思：
+     "每块最少 80px，能放几块放几块，剩下的宽度大家平分"
+     → 不用写 @media，窗口自己变窄时列数自动变少！
+     ------------------------------------------------------------ */
+  .auto-demo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+  }
+  .a-tile {
+    background: #7b61c9;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <h1>🧱 打样：Grid / 响应式 / 定位</h1>
+
+  <h2>零件 1：Grid（3 列地砖）</h2>
+  <div class="demo-box">
+    <div class="grid-demo">
+      <div class="tile">1</div>
+      <div class="tile">2</div>
+      <div class="tile">3</div>
+      <div class="tile">4</div>
+      <div class="tile">5</div>
+      <div class="tile">6</div>
+    </div>
+  </div>
+
+  <h2>零件 2：响应式（拖动窗口宽度！窄到 600px 以下会变 1 列）</h2>
+  <div class="demo-box">
+    <div class="responsive-demo">
+      <div class="r-tile">A</div>
+      <div class="r-tile">B</div>
+      <div class="r-tile">C</div>
+    </div>
+  </div>
+
+  <h2>零件 3：定位（右上角"NEW"徽章）</h2>
+  <div class="demo-box">
+    <div class="badge-demo">
+      我是一张卡片
+      <span class="badge">NEW</span>
+    </div>
+  </div>
+
+  <h2>零件 4：auto-fit 自动适应（也拖拖窗口看）</h2>
+  <div class="demo-box">
+    <div class="auto-demo">
+      <div class="a-tile">1</div>
+      <div class="a-tile">2</div>
+      <div class="a-tile">3</div>
+      <div class="a-tile">4</div>
+      <div class="a-tile">5</div>
+      <div class="a-tile">6</div>
+    </div>
+  </div>
+
+  <p class="hint">重点体会零件 4：不用写 @media，窗口变窄时列数自己会从 6 列 → 3 列 → 1 列。</p>
+
+</body>
+</html>
