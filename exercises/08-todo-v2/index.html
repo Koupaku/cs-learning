@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>待办清单 v2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>📝 待办清单 v2</h1>
+
+    <div class="input-row">
+      <input id="todoInput" type="text" placeholder="要做什么？">
+      <button id="addBtn">添加</button>
+    </div>
+
+    <!-- 列表：每条 = 完成按钮 + 文字 + 删除按钮（render 动态生成） -->
+    <ul id="todoList"></ul>
+
+    <!-- 统计：还剩几件未完成（style.css 里有样式） -->
+    <p id="stats"></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
