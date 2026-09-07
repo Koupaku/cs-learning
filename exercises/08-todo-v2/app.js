@@ -10,7 +10,7 @@ const todoList = document.getElementById('todoList');
 const stats = document.getElementById('stats');
 
 // ===== 数据 =====
-let todos = [];   // { id, text, done }
+let todos = [];   // { id, text, done } 
 
 // ===== 渲染（v1 的基础上改造） =====
 function render() {
@@ -27,7 +27,7 @@ function render() {
     doneBtn.className = 'btn-done';
     doneBtn.addEventListener('click', () => toggleDone(todo.id));
     li.appendChild(doneBtn);
-
+    
     // 文字
     const span = document.createElement('span');
     span.textContent = todo.text;
@@ -41,7 +41,11 @@ function render() {
     li.appendChild(delBtn);
 
     todoList.appendChild(li);
+    
+    console.log(todo);
+    
   });
+
 
   // TODO 2: 更新统计（还剩几件未完成）
   // 提示：const left = todos.filter(todo => !todo.done).length;
@@ -59,11 +63,15 @@ function addTodo() {
   }
   todos = [...todos, { id: Date.now(), text, done: false }];  // ★ v2 升级：展开运算符添加
   todoInput.value = '';
+  
+  console.log(todos);
+  
   render();
 }
 
 // ===== 删除（v1 直接搬） =====
 function deleteTodo(id) {
+
   todos = todos.filter((todo) => todo.id !== id);
   render();
 }

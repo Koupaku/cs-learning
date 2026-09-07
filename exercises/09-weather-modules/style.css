@@ -1,0 +1,51 @@
+/* 练习 09：天气卡片模块化样式（从练习 07 复制，可自行美化） */
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 24px 32px;
+  max-width: 360px;
+  width: 80%;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.city-btns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.city-btn {
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  padding: 8px 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  font-size: 14px;
+}
+.city-btn:hover {
+  background: #eef2ff;
+}
+
+.weather-emoji { font-size: 64px; }
+.city-name { font-size: 20px; font-weight: bold; margin-top: 8px; }
+.temp { font-size: 48px; font-weight: bold; }
+.wind { color: #666; margin-top: 4px; }
+
+#status { min-height: 20px; margin-top: 12px; }
+#status.loading { color: #4a90d9; }
+#status.error { color: #e05d5d; }
