@@ -1,0 +1,16 @@
+/* 全局样式：页面级的东西放这里 */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Microsoft YaHei", sans-serif;
+  background: #f0f6ff;
+}
+
+/* 布局居中放在 #root 上（React 的内容都住在 #root 里） */
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

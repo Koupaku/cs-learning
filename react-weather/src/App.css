@@ -1,0 +1,30 @@
+/* 组件样式：.card 系列 */
+.card {
+  background: white;
+  padding: 32px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 360px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: aquamarine;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.tags { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.tag {
+  background: #eee;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: #555;
+}
