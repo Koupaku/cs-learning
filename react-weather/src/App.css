@@ -28,3 +28,16 @@
   font-size: 13px;
   color: #555;
 }
+
+.like-btn {
+  margin-top: 16px;
+  border: none;
+  border-radius: 999px;
+  background: #ffe0e0;
+  color: #d64545;
+  padding: 6px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.like-btn:hover { background: #ffd0d0; }
