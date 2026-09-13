@@ -15,6 +15,7 @@ function TodoApp() {
         setTodos([...todos, { id:Date.now(), text:input, done: false}])
         setInput('')
     }
+    //能写成setTodos(prev =>({...prev,{ id:Date.now(), text:input, done: false}}))嘛？;
  //这里addTodo传进来的数是input？ 怎么和input联系上的？
 
     function deleteTodo(id) {
