@@ -87,7 +87,7 @@ function Part4() {
         const timer = setInterval(() => {
             setSeconds((prev) => prev + 1)
         },1000)
-        
+         //setSeconds可以直接更新seconds的值？
         return () => {
             console.log(`[零件4]拆掉timer`);
             clearInterval(timer)
@@ -109,7 +109,7 @@ function Part4() {
     )//点`开始` 调用setRunning,反转running为true,渲染网页的时候也执行useEffect,
     // running === true 跳过return, log装上timer,timer计时...
     //为什么在同一个对象里的拆掉timer没有被执行？ 一个对象有2个return, 它们和if的关系是怎么样的？
-
+    ///其实已经执行了，但是只是存在return里，等点暂停的时候，直接返回return就被执行
 }
 
 

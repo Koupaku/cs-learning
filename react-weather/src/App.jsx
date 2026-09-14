@@ -2,10 +2,10 @@
 //npm run dev -- --host 127.0.0.1
 import './App.css'
 // 第五课「五练」第 1 练：先看 useEffect 打样（TodoApp 已存进 Git，训练 4 再换回来）
-import UseEffectDemo from './demo/UseEffectDemoCopy.jsx'
+import Clock from './components/Clock.jsx' 
 
 function App() {
-  return <UseEffectDemo />
+  return <Clock />
 }
 
 export default App

@@ -241,6 +241,34 @@ setTodos((prev) => [...prev, { id: Date.now(), text: input, done: false }])
 | 函数式更新 | `setX(prev => ...)`，用最新值算新值 |
 | 闭包旧值 | effect/定时器里的变量永远是"出生那一轮"的值 |
 | 提前返回 early return | `if (...) return`，函数就地结束 |
+| `new Date()` | **普通 JS**：造一个"现在这一刻"的日期对象（不是字符串） |
+| `toLocaleTimeString('zh-CN')` | **普通 JS**：把日期对象变成 `14:30:05` 这种中文习惯的**时间字符串** |
+
+---
+
+## 11. `new Date()` 与 `toLocaleTimeString()` 读法卡（训练 3 用）🕐
+
+> **第一次出现就解释**（约定 ④）。注意：这两个**全是普通 JS**，跟 React 一点关系都没有——
+> 训练 3 里唯一 React 特有的东西还是 `useEffect` 和依赖数组（格⑥ 的重点）。
+
+```jsx
+const now = new Date()
+const text = now.toLocaleTimeString('zh-CN')   // → "14:30:05"
+```
+
+| 格 | 内容 |
+|----|------|
+| ① 写法 | `new Date()` ／ `某个Date对象.toLocaleTimeString('zh-CN')` |
+| ② 括号里填什么 | `new Date()` —— **空括号 = "现在这一刻"**（填数字则是指定时间）；`toLocaleTimeString` 里填**地区代码**，如 `'zh-CN'`（不填也行，用系统默认） |
+| ③ 返回什么 | `new Date()` 返回一个 **Date 对象**（**不是字符串**！）；`toLocaleTimeString` 返回**字符串**，如 `"14:30:05"` |
+| ④ 怎么接住 | `const now = new Date()` → 再 `now.toLocaleTimeString(...)`。两步，别想一步到位 |
+| ⑤ 一句中文读法 | "**造一个日期对象，内容是现在**" → "**把它按中文习惯变成时间字符串**" |
+| ⑥ ★ 哪部分是 React 特有 | **都不是**。`new Date` 和 `toLocaleTimeString` 是**浏览器自带的普通 JS**（第 5 课练习里就用过 `Date.now()` 做 id）。本练 React 特有的只有 `useEffect` + 依赖数组 |
+| ⑦ 易错点 + 现象 | ① 直接把 `new Date()` 丢进 JSX → 渲染成一长串英文日期（`Wed Sep 13 2026 ...`），所以要 `.toLocaleTimeString()`<br>② **大小写**：`toLocaleTimeString` 是**大写 T、大写 S**；写成 `toLocaleString` 是**另一个方法**，出来是"日期 + 时间"<br>③ `new Date` 少了 `new` → 返回字符串，后面 `.toLocaleTimeString` 直接报 `is not a function` |
+
+**和训练 2 的关键区别**（这一练真正要体会的）：
+时间是从**外面读**进来的，不是靠上一轮的值算出来的 → 所以 **`setTime(new Date()...)` 不需要 `prev =>`**。
+`prev =>` 只在"**新值要靠旧值算**"时才需要（比如 `prev + 1`）。
 
 ---
 
