@@ -243,6 +243,7 @@ setTodos((prev) => [...prev, { id: Date.now(), text: input, done: false }])
 | 提前返回 early return | `if (...) return`，函数就地结束 |
 | `new Date()` | **普通 JS**：造一个"现在这一刻"的日期对象（不是字符串） |
 | `toLocaleTimeString('zh-CN')` | **普通 JS**：把日期对象变成 `14:30:05` 这种中文习惯的**时间字符串** |
+| `timeZone: 'Asia/Tokyo'` | **普通 JS**：写在第二个参数里，告诉格式化函数"**按哪个城市的钟**"来算；不写就一直用**本机时区** |
 
 ---
 
@@ -269,6 +270,37 @@ const text = now.toLocaleTimeString('zh-CN')   // → "14:30:05"
 **和训练 2 的关键区别**（这一练真正要体会的）：
 时间是从**外面读**进来的，不是靠上一轮的值算出来的 → 所以 **`setTime(new Date()...)` 不需要 `prev =>`**。
 `prev =>` 只在"**新值要靠旧值算**"时才需要（比如 `prev + 1`）。
+
+### 11.1 补充卡：`toLocaleTimeString` 的**第二个参数**——选项对象 `{ timeZone: ... }`
+
+> 这张是 **2026-09-13 训练 3 中途补的**：学员切换城市时发现"时间没跟着变"，根因就在这里。
+
+```jsx
+new Date().toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo' })
+//                                   └ 第一个参数：用什么【格式】  └ 第二个参数：用哪个【时区】
+```
+
+| 格 | 内容 |
+|----|------|
+| ① 写法 | `.toLocaleTimeString(地区代码, { timeZone: '时区名' })` |
+| ② 括号里填什么 | 第一个：**地区代码**（`'zh-CN'` / `'ja-JP'` / `'en-US'`）= 决定**格式**；第二个：**一个对象**，里面 `timeZone` 填 **IANA 时区名**（`'Asia/Tokyo'`、`'America/New_York'`、`'Asia/Shanghai'`）。第二个**可以省略**，省略时用**本机时区** |
+| ③ 返回什么 | 同样是一个**字符串** |
+| ④ 怎么接住 | 结果直接塞给 `setTime(...)` 就行 |
+| ⑤ 一句中文读法 | "把现在这一刻，**按日本格式、用东京的钟**，变成时间字符串" |
+| ⑥ ★ React 特有？ | **完全不是**。这是**普通 JS / 浏览器自带**的国际化 API（`Intl` 那一套）。React 在这里一点戏都没有 |
+| ⑦ 易错点 + 现象 | ★ **只写第一个参数 = 只换格式，不换时区**！`'ja-JP'` 出来的还是**北京的时刻**，只是写法像日本。**要换城市的时间，必须加第二个参数**<br>② 时区名区分大小写、带斜杠：`'Asia/Tokyo'` ✅ / `'asia/tokyo'` ❌ / `'东京'` ❌<br>③ 时区名写错 → 直接抛 `RangeError: Invalid time zone specified` |
+
+> 📌 **一句话记住**：**第一个参数管"长什么样"，第二个参数管"是几点"。**
+
+**实测对照**（2026-09-13 在本机跑出来的真实输出）：
+
+| 写法 | 输出 | 是那个城市的时间吗 |
+|------|------|--------------------|
+| `toLocaleTimeString('zh-CN')` | `16:02:30` | （本机时区，北京） |
+| `toLocaleTimeString('ja-JP')` | `16:02:30` | ❌ **和北京一模一样**——只换了格式 |
+| `toLocaleTimeString('en-US')` | `4:02:30 PM` | ❌ 还是同一个时刻 |
+| `toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo' })` | `17:02:30` | ✅ |
+| `toLocaleTimeString('en-US', { timeZone: 'America/New_York' })` | `4:02:30 AM` | ✅ |
 
 ---
 
